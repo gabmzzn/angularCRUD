@@ -1,0 +1,145 @@
+<h3 style="margin-bottom: 35px;">Lista de Productos
+    <button style="float: right;margin: 0px 16px;" class="agregar" mat-flat-button color="primary"
+        data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Agregar un producto
+    </button>
+</h3>
+
+<form class="row gy-2 gx-3 align-items-center w-100" style="margin-bottom: 5px">
+    <div class="col-auto" style="width: 100%;">
+        <div class="input-group">
+            <div class="input-group-text">Buscar</div>
+            <input type="text" class="form-control" id="filtro" autocomplete="off" placeholder="Nombre de producto"
+                (keyup)="applyFilter($event)" #input>
+        </div>
+    </div>
+</form>
+
+<!-- Lista productos -->
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z0 table table-striped" style="width: 98.5%;">
+    <ng-container matColumnDef="Nombre">
+        <th style="text-align: left !important;" mat-header-cell *matHeaderCellDef> Nombre </th>
+        <td style="text-align: left !important;" class="border" mat-cell *matCellDef="let producto"> {{producto.nombre}}
+        </td>
+    </ng-container>
+    <ng-container matColumnDef="Stock">
+        <th mat-header-cell *matHeaderCellDef> Stock </th>
+        <td class="border" mat-cell *matCellDef="let producto" style="font-weight: 900 !important;">
+            <b>{{producto.stock}}</b>
+        </td>
+    </ng-container>
+    <ng-container matColumnDef="Acciones">
+        <th mat-header-cell *matHeaderCellDef> Acciones </th>
+        <td class="border" mat-cell *matCellDef="let producto">
+            <button class="delete" mat-flat-button color="warn" (click)="selectProducto(producto)"
+                data-bs-toggle="modal" data-bs-target="#eliminar"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                    height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                    <path
+                        d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                    <path fill-rule="evenodd"
+                        d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                </svg>
+            </button>
+            <span>&nbsp;&nbsp;&nbsp;</span>
+            <button class="info" mat-flat-button color="primary" (click)="selectProducto(producto)"
+                data-bs-toggle="modal" data-bs-target="#info">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-file-text-fill" viewBox="0 0 16 16">
+                    <path
+                        d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM5 4h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zM5 8h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1zm0 2h3a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1z" />
+                </svg>
+            </button>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<mat-paginator [pageSizeOptions]="[10, 50, 100, 250]" showFirstLastButtons>
+</mat-paginator>
+
+
+<!-- Modal Agregar -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel"><b>Agregar un producto</b></h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        (click)="clear()"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-floating mb-3">
+                        <input [(ngModel)]="selProducto.cod" maxlength="10" name="cod" class="form-control"
+                            id="floatingInput" type="text" min="0" placeholder=" " autocomplete="off" required>
+                        <label for="floatingInput">Código</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input [(ngModel)]="selProducto.nombre" maxlength="45" name="nombre" class="form-control"
+                            id="floatingInput" type="text" placeholder=" " autocomplete="off" required>
+                        <label for="floatingInput">Nombre</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <span style="position: absolute; left: 13px; top: 25px">$</span>
+                        <input [(ngModel)]="selProducto.precio" name="precio" class="form-control" type="number" min="0"
+                            id="floatingInput" style="padding-left: 25px;" autocomplete="off" maxlength="10" required>
+                        <label for="floatingInput">Precio</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="delete" mat-flat-button color="primary" data-bs-dismiss="modal"
+                        (click)="clear()">Cancelar</button>
+                    <button style="margin-left: 10px;" mat-flat-button color="primary" data-bs-dismiss="modal"
+                        (click)="addProducto()"
+                        [disabled]="selProducto.precio == undefined || selProducto.nombre == undefined || selProducto.cod == undefined">Agregar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Eliminar -->
+<div class="modal fade" id="eliminar" tabindex="-2" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel"><b>Eliminar Producto</b></h4>
+            </div>
+            <div class="modal-body">
+                <p>Está seguro de querer eliminar el siguiente producto?</p>
+                <p><b>{{selProducto.nombre}}</b></p>
+            </div>
+            <div class="modal-footer">
+                <button class="delete" mat-flat-button color="primary" data-bs-dismiss="modal"
+                    (click)="clear()">Cancelar</button>
+                <button style="margin-left: 10px;" mat-flat-button color="warn" id="delete-product"
+                    data-bs-dismiss="modal" (click)="deleteProducto(selProducto)">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Info -->
+<div class="modal fade" id="info" tabindex="-2" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" style="width: 650px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel"><b>Información del Producto</b></h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    (click)="clear()"></button>
+            </div>
+            <div class="modal-body">
+                <h5><b>Código:</b> {{selProducto.cod}}</h5>
+                <h5><b>Nombre:</b> {{selProducto.nombre}}</h5>
+                <h5><b>Precio:</b> ${{selProducto.precio | number:'1.2-2'}}</h5>
+                <h5><b>Stock:</b> {{selProducto.stock}}</h5>
+            </div>
+            <div class="modal-footer">
+                <button class="delete" mat-flat-button color="primary" data-bs-dismiss="modal"
+                    (click)="clear()">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

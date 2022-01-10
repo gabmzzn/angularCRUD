@@ -1,0 +1,47 @@
+<h3 style="margin-bottom: 35px;">Ventas Realizadas</h3>
+<form class="row gy-2 gx-3 align-items-center w-100">
+    <div class="col-auto w-100" style="margin-bottom: 5px">
+        <div class="input-group">
+            <div class="input-group-text">Buscar</div>
+            <input type="text" class="form-control" id="filtro" autocomplete="off" placeholder="Nombre de cliente"
+                (keyup)="applyFilter($event)" #input>
+        </div>
+    </div>
+
+</form>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z0 table table-striped" style="width:98.5%;">
+    <ng-container matColumnDef="Fecha">
+        <th style="text-align: left !important; width: 40%;" mat-header-cell *matHeaderCellDef> Fecha </th>
+        <td style="text-align: left !important;" mat-cell class="border" *matCellDef="let factura"> {{factura.fecha |
+            date:'EEEE, MMMM d, y, h:mm' |
+            uppercase}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Apellido">
+        <th mat-header-cell *matHeaderCellDef> Apellido </th>
+        <td style="font-weight: 400 !important;" mat-cell class="border" *matCellDef="let factura"> {{factura.apellido |
+            uppercase}}
+        </td>
+    </ng-container>
+    <ng-container matColumnDef="Nombre">
+        <th mat-header-cell *matHeaderCellDef> Nombre </th>
+        <td style="font-weight: 400 !important;" mat-cell class="border" *matCellDef="let factura"> {{factura.nombre |
+            uppercase}}
+        </td>
+    </ng-container>
+    <ng-container matColumnDef="Monto">
+        <th mat-header-cell *matHeaderCellDef style="width: 30%;"> Monto </th>
+        <td mat-cell class="border" *matCellDef="let factura" style="color: #04bd98 !important;"><b>${{factura.monto |
+                number:'1.2-2'}}</b></td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No hay resultados para <b>"{{input.value}}"</b></td>
+    </tr>
+</table>
+<mat-paginator [pageSizeOptions]="[10, 25, 50]" showFirstLastButtons>
+</mat-paginator>

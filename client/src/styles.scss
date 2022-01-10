@@ -1,0 +1,58 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Festive&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+body {
+  font-family: 'Roboto', sans-serif !important;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.delete {
+  background-color: #8a8a8a !important;
+  color: white !important;
+  min-width: unset !important;
+}
+
+.info {
+  background-color: #18bc9c !important;
+    min-width: unset !important;
+}
+
+.agregar {
+  background-color: #18bc9c !important;
+}
+
+.mat-flat-button.mat-primary,
+.mat-raised-button.mat-primary,
+.mat-fab.mat-primary,
+.mat-mini-fab.mat-primary {
+    background-color: #18bc9c;
+}
+
+th, td, tr, span, div {
+    font-size: 1rem !important;
+}
+
+th,td,tr {
+    text-align: center !important;
+    line-height: 50px !important;
+    font-weight: 500 !important;
+}
+
+th {
+    font-weight: 900 !important;
+}
+
+.mat-paginator-page-size-label {
+  font-size: 0px !important;
+}
+
+.mat-snack-bar-container {
+  color: rgba(44, 44, 44, 0.7);
+  background: rgb(245, 245, 245);
+  font-weight: 500;
+}
+
+.mat-select-min-line {
+    padding-left: 12px !important;
+}
