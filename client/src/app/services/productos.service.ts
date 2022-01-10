@@ -8,7 +8,7 @@ import { Producto } from '../models/Producto'
 })
 export class ProductosService {
 
-  API_URI = 'https://ferreteria-pi.herokuapp.com/'
+  API_URI = 'https://ferreteria-pi.herokuapp.com'
 
   constructor(private http: HttpClient) { }
 

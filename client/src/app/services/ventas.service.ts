@@ -7,7 +7,7 @@ import { Factura } from '../models/Factura'
 })
 export class VentasService {
 
-  API_URI = 'https://ferreteria-pi.herokuapp.com/'
+  API_URI = 'https://ferreteria-pi.herokuapp.com'
 
   constructor(private http: HttpClient) { }
 
