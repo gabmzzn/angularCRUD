@@ -1,10 +1,10 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+"use strict"
+Object.defineProperty(exports, "__esModule", { value: true })
 exports.default = {
     database: {
-        host: 'localhost',
-        user: 'root',
-        // password: 'pass',
-        database: 'ferreteria_db',
+        host: 'mysql-ferreteria-pi.alwaysdata.net',
+        user: '254302_root',
+        password: 'verano2022',
+        database: 'ferreteria-pi_db',
     }
-};
+}
