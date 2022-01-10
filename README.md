@@ -19,3 +19,4 @@ Challenge Fullstack técnico para Pi Consulting
  `npm install`
   `ng serve`
  - Por defecto la app se estará ejecutando en http://localhost:4200/
+- La versión online del proyecto está montada en https://ferreteria-pi.vercel.app/
