@@ -57,7 +57,7 @@ export class ProductosComponent implements OnInit {
       (res: any) => {
         this.getProductos()
         this.dataSource.paginator = this.paginator
-        this.snackBar.open(`Producto "${this.selProducto.nombre}" añadido exitosamente`, '', { duration: 3000 })
+        this.snackBar.open(`El producto ${this.selProducto.nombre} fue añadido exitosamente`, '', { duration: 3000 })
         this.clear()
       },
       err => console.error(err)
@@ -73,7 +73,7 @@ export class ProductosComponent implements OnInit {
       (res: any) => {
         this.getProductos()
         this.dataSource.paginator = this.paginator
-        this.snackBar.open(`Producto "${this.selProducto.nombre}" eliminado exitosamente`, '', { duration: 3000 })
+        this.snackBar.open(`El producto ${this.selProducto.nombre} fue eliminado exitosamente`, '', { duration: 3000 })
         this.clear()
       },
       err => console.error(err)

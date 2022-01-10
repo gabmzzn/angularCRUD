@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node .",
     "build": "tsc -w",
     "dev": "nodemon build/index.js"
   },
@@ -16,8 +17,6 @@
     "cors": "^2.8.5",
     "express": "^4.17.2",
     "morgan": "^1.10.0",
-    "mysql2": "^2.3.3",
-    "promise-mysql": "^5.0.4",
     "promise-mysql2": "^1.0.0"
   },
   "devDependencies": {
