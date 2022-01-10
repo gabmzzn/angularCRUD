@@ -1,7 +1,4 @@
-DROP DATABASE IF EXISTS ferreteria_db;
-CREATE DATABASE ferreteria_db;
-
-USE ferreteria_db;
+USE `ferreteria-pi_db`;
 
 CREATE TABLE productos(
     cod VARCHAR(11) NOT NULL PRIMARY KEY,
